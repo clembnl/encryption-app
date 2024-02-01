@@ -1,0 +1,19 @@
+{
+  "name": "encryption-app",
+  "version": "1.0.0",
+  "description": "Encryption App for my portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clembnl/encryption-app.git"
+  },
+  "author": "clembnl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clembnl/encryption-app/issues"
+  },
+  "homepage": "https://github.com/clembnl/encryption-app#readme"
+}
