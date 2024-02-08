@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Encryption App for my portfolio",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/clembnl/encryption-app/issues"
   },
-  "homepage": "https://github.com/clembnl/encryption-app#readme"
+  "homepage": "https://github.com/clembnl/encryption-app#readme",
+  "dependencies": {
+    "@noble/hashes": "^1.3.3"
+  }
 }
