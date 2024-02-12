@@ -1,5 +1,3 @@
-// HASH FUNCTION //
-
 import { sha256 } from '@noble/hashes/sha256';
 import { blake2s } from '@noble/hashes/blake2s';
 import { blake3 } from '@noble/hashes/blake3';
@@ -23,8 +21,7 @@ function hash(secretKey, algorithm) {
             throw Error('Invalid input');
     }
 };
-
-//console.log(hash('test', 'sha256'));
+module.exports.hash = hash;
 
 function symEncrypt(hashValue, encryptionalgo, message) {
     hashValue = Buffer.from(hashValue, 'hex');
@@ -42,6 +39,7 @@ function symEncrypt(hashValue, encryptionalgo, message) {
             throw Error('Invalid input');
     }
 };
+module.exports.symEncrypt = symEncrypt;
 
 function asymKeys() {
     return crypto.generateKeyPairSync('rsa', { 
@@ -56,14 +54,17 @@ function asymKeys() {
         } 
     });
 };
+module.exports.asymKeys = asymKeys;
 
 function asymEncrypt(publicKey, hashValue) {
     return Buffer.from(crypto.publicEncrypt(publicKey, Buffer.from(hashValue, 'hex'))).toString('hex');
 };
+module.exports.asymEncrypt = asymEncrypt;
 
 function asymDecrypt(privateKey, encryptedKey) {
     return Buffer.from(crypto.privateDecrypt(privateKey, Buffer.from(encryptedKey, 'hex'))).toString('hex');
 };
+module.exports.asymDecrypt = asymDecrypt;
 
 function symDecrypt(decryptedKey, encryptedMessage, encryptionalgo) {
     const hashValue = Buffer.from(decryptedKey, 'hex');
@@ -82,13 +83,14 @@ function symDecrypt(decryptedKey, encryptedMessage, encryptionalgo) {
             throw Error('Invalid input');
     }
 };
+module.exports.symDecrypt = symDecrypt;
 
-// TEST
-
+/// TESTS
+/*
 const encryptedMessageTest = symEncrypt('9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'BlowFish-CBC', 'test');
 console.log(encryptedMessageTest);
 console.log('////////////////////');
-/*
+
 const keys = asymKeys();
 const encryptedKeyTest = asymEncrypt(keys.publicKey, '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08');
 console.log(encryptedKeyTest)
@@ -98,8 +100,7 @@ console.log(decryptedKeytest);
 console.log('////////////////////');
 const decryptedMessageTest = symDecrypt(decryptedKeytest, encryptedMessageTest, 'BlowFish-CBC');
 console.log(decryptedMessageTest);
-*/
 
 const decryptedMessageTest = symDecrypt('9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', encryptedMessageTest, 'BlowFish-CBC');
 console.log(decryptedMessageTest);
-
+*/
