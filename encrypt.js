@@ -1,8 +1,6 @@
-import { sha256 } from '@noble/hashes/sha256';
-import { blake2s } from '@noble/hashes/blake2s';
-import { blake3 } from '@noble/hashes/blake3';
-import { k12 } from '@noble/hashes/sha3-addons';
-import * as crypto from 'crypto';
+const hashes = require('@noble/hashes');
+const sha3 = require('@noble/hashes/sha3-addons');
+const crypto = require('crypto')
 
 const iv_aes = crypto.randomBytes(16);
 const iv_bf = crypto.randomBytes(8);
@@ -10,13 +8,13 @@ const iv_bf = crypto.randomBytes(8);
 function hash(secretKey, algorithm) {
     switch (algorithm) {
         case 'sha256':
-            return Buffer.from(sha256(secretKey)).toString('hex');
+            return Buffer.from(hashes.sha256(secretKey)).toString('hex');
         case 'blake2':
-            return Buffer.from(blake2s(secretKey)).toString('hex');
+            return Buffer.from(hashes.blake2s(secretKey)).toString('hex');
         case 'blake3':
-            return Buffer.from(blake3(secretKey)).toString('hex');
+            return Buffer.from(hashes.blake3(secretKey)).toString('hex');
         case 'kangarootwelve':
-            return Buffer.from(k12(secretKey)).toString('hex');
+            return Buffer.from(sha3.k12(secretKey)).toString('hex');
         default:
             throw Error('Invalid input');
     }
