@@ -1,4 +1,6 @@
-const hashes = require('@noble/hashes');
+const sha256 = require('@noble/hashes/sha256');
+const blake2s = require('@noble/hashes/blake2s');
+const blake3 = require('@noble/hashes/blake3');
 const sha3 = require('@noble/hashes/sha3-addons');
 const crypto = require('crypto')
 
@@ -8,11 +10,11 @@ const iv_bf = crypto.randomBytes(8);
 function hash(secretKey, algorithm) {
     switch (algorithm) {
         case 'sha256':
-            return Buffer.from(hashes.sha256(secretKey)).toString('hex');
+            return Buffer.from(sha256.sha256(secretKey)).toString('hex');
         case 'blake2':
-            return Buffer.from(hashes.blake2s(secretKey)).toString('hex');
+            return Buffer.from(blake2s.blake2s(secretKey)).toString('hex');
         case 'blake3':
-            return Buffer.from(hashes.blake3(secretKey)).toString('hex');
+            return Buffer.from(blake3.blake3(secretKey)).toString('hex');
         case 'kangarootwelve':
             return Buffer.from(sha3.k12(secretKey)).toString('hex');
         default:
@@ -85,20 +87,27 @@ module.exports.symDecrypt = symDecrypt;
 
 /// TESTS
 /*
-const encryptedMessageTest = symEncrypt('9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'BlowFish-CBC', 'test');
+const hashTest = hash('secret', 'sha256');
+console.log(hashTest);
+console.log('////////////////////');
+
+//const encryptedMessageTest = symEncrypt('9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'BlowFish-CBC', 'test');
+const encryptedMessageTest = symEncrypt(hashTest, 'BlowFish-CBC', 'test');
 console.log(encryptedMessageTest);
 console.log('////////////////////');
 
 const keys = asymKeys();
-const encryptedKeyTest = asymEncrypt(keys.publicKey, '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08');
+//const encryptedKeyTest = asymEncrypt(keys.publicKey, '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08');
+const encryptedKeyTest = asymEncrypt(keys.publicKey, hashTest);
 console.log(encryptedKeyTest)
 console.log('////////////////////');
-const decryptedKeytest = asymDecrypt(keys.privateKey, encryptedKeyTest);
+const decryptedKeytest = asymDecrypt(keys.privateKey, encryptedKeyTest.toString());
 console.log(decryptedKeytest);
 console.log('////////////////////');
 const decryptedMessageTest = symDecrypt(decryptedKeytest, encryptedMessageTest, 'BlowFish-CBC');
 console.log(decryptedMessageTest);
-
+*/
+/*
 const decryptedMessageTest = symDecrypt('9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', encryptedMessageTest, 'BlowFish-CBC');
 console.log(decryptedMessageTest);
 */
