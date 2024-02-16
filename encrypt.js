@@ -18,7 +18,7 @@ function hash(secretKey, algorithm) {
         case 'kangarootwelve':
             return Buffer.from(sha3.k12(secretKey)).toString('hex');
         default:
-            throw Error('Invalid input');
+            throw Error('Invalid input !');
     }
 };
 module.exports.hash = hash;
@@ -36,7 +36,7 @@ function symEncrypt(hashValue, encryptionalgo, message) {
             return Buffer.concat([cipher_bf.update(message), cipher_bf.final()]).toString('hex');
             
         default :
-            throw Error('Invalid input');
+            throw Error('Invalid input for encryption algorithm !');
     }
 };
 module.exports.symEncrypt = symEncrypt;
