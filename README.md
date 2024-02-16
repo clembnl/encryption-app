@@ -4,9 +4,9 @@
 npm run build
 ```
 
-## Run Exectubales
+## Run Executables
 
-For Linux or MacOS open your terminal and use the command
+For Linux or MacOS open your terminal and use the command :
 
 ```bash
 ./ecryption-app-linux
@@ -18,5 +18,4 @@ or
 ./ecryption-app-macos
 ```
 
-
-For Windows execute ecryption-app-win.exe
+For Windows : execute ecryption-app-win.exe
