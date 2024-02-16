@@ -1,10 +1,10 @@
-# Build Executables (Linux, MacOS & Windows)
+## Build Executables (Linux, MacOS & Windows)
 
 ```bash
 npm run build
 ```
 
-# Run Exectubales
+## Run Exectubales
 
 For Linux or MacOS open your terminal and use the command
 
@@ -17,5 +17,6 @@ or
 ```bash
 ./ecryption-app-macos
 ```
+
 
 For Windows execute ecryption-app-win.exe
